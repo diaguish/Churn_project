@@ -1,0 +1,30 @@
+pip install notebook
+
+Jupyter notebook >>> permet d'ouvrir la page qui représente l'environnement de travail
+
+pip install pandas numpy matplotlib seaborn scikit-learn
+
+
+Le churn, c’est tout simplement :
+
+❌ quand un client arrête un service
+
+Selon le contexte, ça peut vouloir dire :
+
+résilier un abonnement
+
+ne plus payer
+
+ne plus utiliser le service
+
+partir chez un concurrent
+
+📌 Churn = perte de client
+
+  👉 Objectif EXACT du projet :
+Prédire si un client va quitter le service (churn = Yes) ou rester (churn = No)
+à partir de ses informations (âge, ancienneté, services, prix, etc.)
+
+Formulé encore plus simplement :
+
+À partir des données client, peut-on deviner s’il va annuler son abonnement ?
