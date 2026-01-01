@@ -21,10 +21,143 @@ partir chez un concurrent
 
 📌 Churn = perte de client
 
-  👉 Objectif EXACT du projet :
+  👉 Objectif EXACT du projet :
 Prédire si un client va quitter le service (churn = Yes) ou rester (churn = No)
 à partir de ses informations (âge, ancienneté, services, prix, etc.)
 
 Formulé encore plus simplement :
 
 À partir des données client, peut-on deviner s’il va annuler son abonnement ?
+
+///////EXPLICATION COMMANDE
+import pandas as pd
+permet de faire un raccourci
+
+df = pd.read_csv("data/telecom_churn.csv")
+nouvelle variable df  pd(outils pandas renomme) read_csv permet de lire le fichier avec la destination mise entre crochet
+
+df.head()
+affiche les 5 premières lignes
+
+df.shape
+ca  donne le nombre de ligne et le nombre de colonnes
+
+df.info()
+ca donne le nombre
+
+df.columns
+affiche les colonnes
+df**["Churn"].value_counts()**
+le [churn] permet d acceder a la colonne churn on ne met pas de numero
+value_counts() permet d afficher les differentes valeurs qui sont dans la colonne et leur nombre >>> lorsqu'on ajoute .plot(kind="bar")
+
+.plot() → dessiner un graphique
+ kind="bar" → barres
+
+df.groupby("Churn")["AccountWeeks"].mean()
+groupby("Churn") permet de separer selon le churn donnc on as 2 sous tableau
+mean() permet de faire les moyennes
+
+columns est une information déjà stockée
+
+ce n’est pas une action
+
+Python te renvoie juste la liste des noms de colonnes
+
+👉 Donc pas de ().
+
+df.isnull().sum()
+isnull - repere les valeurs manquantes
+sum() - il les compte
+
+X = df.drop("Churn", axis=1)
+drop("Churn") → enlève la colonne Churn
+axis=1 → on supprime une colonne (pas une ligne)
+
+////DEBUT MACHINE LEARNING
+(from sklearn.model_selection import train_test_split) “Je veux utiliser un outil qui coupe mes données en train et test.”
+outil de scikit-learn
+coupe les données proprement
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+👉 “Prends les données X et les réponses y”
+
+test_size=0.2
+👉 “Garde 20 % des données pour le test”
+👉 donc 80 % pour apprendre
+random_state=42 " 42 est juste une convention ça pourrait être 0, 1, 123, 999" L’important n’est pas 42,
+mais le fait d’en mettre un.
+👉 “Fais le découpage toujours de la même façon”
+
+
+on sépare les données pour ne pas tricher
+
+train_test_split le fait proprement
+
+test_size décide du pourcentage de test
+
+random_state fige le hasard
+
+sans random_state → résultats variables
+
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression(max_iter=1000)  max_iter donne assez d’itérations pour converger
+model.fit(X_train, y_train)
+cette commande vas generer un tableau qui represente juste les informations du modele au "propre"
+y_pred = model.predict(X_test)
+model.predict_proba(X_test)
+
+from sklearn.metrics import accuracy_score
+
+accuracy = accuracy_score(y_test, y_pred)
+accuracy
+
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_test, y_pred)
+
+
+from sklearn.metrics import recall_score
+
+model_balanced = LogisticRegression(
+    max_iter=1000,
+    class_weight="balanced"
+)
+
+
+from sklearn.metrics import precision_score
+precision_score(y_test, y_pred_balanced)
+
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+from sklearn.metrics import confusion_matrix, recall_score, precision_score, accuracy_score
+
+
+pipeline = Pipeline(steps=[
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression(max_iter=1000, class_weight="balanced"))
+])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
