@@ -1,7 +1,7 @@
 # Customer Churn Prediction
 
 ## 📌 Objectif
-LL’objectif de ce projet était de prédire le churn client à partir de données télécom.
+L’objectif de ce projet était de prédire le churn client à partir de données télécom.
 
 Une première régression logistique a montré une bonne accuracy mais un recall très faible, ce qui signifiait que la majorité des clients churners n’étaient pas détectés.
 
